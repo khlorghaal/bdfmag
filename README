@@ -1,0 +1,12 @@
+bdfmag fontin fontout i
+fontinout: filenames
+i: 2 >= integer < 1<<16
+
+for magnifying bitmap fonts in BDF format.
+current font renderers do not support rescaling of bitmap fonts?? more ideal would be to scale within the font renderer, allowing modern support of raster fonts. but this approach is immensely simpler.
+BDF was chosen due to it being the most common raster-font format in modern use, in addition to being relatively human-readable.
+
+the tools i attempted rescaling with: gbdfed and fontforge, do not support rescaling bitmap fonts.
+the result of most programs attempting to rescale a bitmap font is an increase of character spacing, while the characters remain the same pixel size. ideally the font renderer should detect a bitmap font, and floor the scale to an integer multiple of the original to apply a rescaling.
+
+bdfmag only supports integer multiples, as floating point rescaling defeats the purpose and beauty of raster fonts.
